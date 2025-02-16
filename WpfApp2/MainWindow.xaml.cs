@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LangTrack
+namespace WpfApp2
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
