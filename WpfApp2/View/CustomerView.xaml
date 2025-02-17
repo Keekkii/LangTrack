@@ -1,12 +1,296 @@
 ﻿<UserControl x:Class="WpfApp2.View.CustomerView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WpfApp2.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             d:DesignHeight="468.876" d:DesignWidth="800">
     <Grid>
-            
+        <!-- Grid for Column Definitions (3 columns for 3 cards) -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- First Card -->
+        <Border Grid.Column="0" CornerRadius="10" BorderThickness="1" Margin="10" Opacity="0.9"
+                Cursor="Hand" RenderTransformOrigin="0.5,0.5" Tag="Card 1"
+                MouseLeftButtonUp="Card_Click">
+
+            <!-- Apply a RotateTransform to the whole card -->
+            <Border.RenderTransform>
+                <ScaleTransform x:Name="Card1Scale" ScaleX="1"/>
+            </Border.RenderTransform>
+
+            <Border.Resources>
+                <!-- Flip Animation -->
+                <Storyboard x:Key="FlipAnimationCard1">
+                    <DoubleAnimation Storyboard.TargetName="Card1Scale" 
+                     Storyboard.TargetProperty="ScaleX"
+                     To="0" Duration="0:0:0.2" AutoReverse="False" Completed="FlipHalfwayCard1"/>
+                </Storyboard>
+            </Border.Resources>
+
+            <!-- This Grid will contain both Front and Back sides -->
+            <Grid>
+                <!-- Front Side (Matches the other two cards) -->
+                <Grid x:Name="FrontSide">
+                    <Border CornerRadius="10" Padding="10">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#060531" Offset="0"/>
+                                <GradientStop Color="#1B1448" Offset="0.75"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                <GradientStop Color="#1B1448" Offset="0"/>
+                                <GradientStop Color="#060531" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
+                            <TextBlock Text="Dodavanje polaznika" Foreground="White" FontSize="20" FontWeight="Bold" 
+                                       FontFamily="Montserrat" HorizontalAlignment="Center"/>
+                            
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Back Side (Same gradient background, no text) -->
+                <Grid x:Name="BackSide" Visibility="Hidden">
+                    <Border CornerRadius="10" Padding="10">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#060531" Offset="0"/>
+                                <GradientStop Color="#1B1448" Offset="0.75"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                <GradientStop Color="#1B1448" Offset="0"/>
+                                <GradientStop Color="#060531" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <!-- StackPanel centered but with consistent TextBox alignment -->
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+                            <!-- Name Input -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <TextBlock Text="Ime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,32,0" HorizontalAlignment="Left"/>
+                                <TextBox x:Name="NameTextBox" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                            </StackPanel>
+
+                            <!-- Surname Input -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <TextBlock Text="Prezime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <TextBox x:Name="SurnameTextBox" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                            </StackPanel>
+
+                            <!-- ID Input -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <TextBlock Text="ID:" Foreground="White" VerticalAlignment="Center" Margin="0,0,40,0"/>
+                                <TextBox x:Name="IdTextBox" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                            </StackPanel>
+
+                            <!-- Tečaj Input -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <TextBlock Text="Tečaj:" Foreground="White" VerticalAlignment="Center" Margin="0,0,26,0"/>
+                                <TextBox x:Name="CourseTextBox" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                            </StackPanel>
+                            <Button Content="Dodaj polaznika" HorizontalAlignment="Center" VerticalAlignment="Center" Click="DodajPolaznika" Margin="10"/>
+                            <TextBlock Name="ErrorPoruka1" Foreground="Red" Visibility="Collapsed" Margin="10" />
+                        </StackPanel>
+                        
+                    </Border>
+                </Grid>
+
+            </Grid>
+        </Border>
+
+        <!-- Second Card -->
+        <Border Grid.Column="1" CornerRadius="10" BorderThickness="1" Margin="10" Opacity="0.9"
+        MouseLeftButtonUp="Card_Click" Tag="Card 2" Cursor="Hand" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <ScaleTransform x:Name="Card2Scale" ScaleX="1"/>
+            </Border.RenderTransform>
+
+            <Border.Resources>
+                <!-- Flip Animation for Card 2 -->
+                <Storyboard x:Key="FlipAnimationCard2">
+                    <DoubleAnimation Storyboard.TargetName="Card2Scale" 
+                     Storyboard.TargetProperty="ScaleX"
+                     To="0" Duration="0:0:0.2" AutoReverse="False" Completed="FlipHalfwayCard2"/>
+                </Storyboard>
+            </Border.Resources>
+
+            <Grid>
+                <!-- Front Side (Card 2) -->
+                <Grid x:Name="FrontSide2">
+                    <Border CornerRadius="10" Padding="10">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#060531" Offset="0"/>
+                                <GradientStop Color="#1B1448" Offset="0.75"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                <GradientStop Color="#1B1448" Offset="0"/>
+                                <GradientStop Color="#060531" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
+                            <TextBlock Text="Brisanje polaznika" Foreground="White" FontSize="20" FontWeight="Bold" FontFamily="Montserrat" HorizontalAlignment="Center"/>
+                            
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Back Side (Card 2) -->
+                <Grid x:Name="BackSide2" Visibility="Hidden">
+                    <Border CornerRadius="10" Padding="10">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#060531" Offset="0"/>
+                                <GradientStop Color="#1B1448" Offset="0.75"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                <GradientStop Color="#1B1448" Offset="0"/>
+                                <GradientStop Color="#060531" Offset="1"/>
+                            </LinearGradientBrush>
+                            
+                        </Border.Background>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+                            <!-- Name Input -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <TextBlock Text="Ime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,33,0" HorizontalAlignment="Left"/>
+                                <TextBox x:Name="NameTextBox1" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                            </StackPanel>
+
+                            <!-- Surname Input -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <TextBlock Text="Prezime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <TextBox x:Name="SurnameTextBox1" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                            </StackPanel>
+
+                            <!-- ID Input -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <TextBlock Text="ID:" Foreground="White" VerticalAlignment="Center" Margin="0,0,41,0"/>
+                                <TextBox x:Name="IdTextBox1" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                            </StackPanel>
+
+                            <!-- Tečaj Input -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <TextBlock Text="Tečaj:" Foreground="White" VerticalAlignment="Center" Margin="0,0,26,0"/>
+                                <TextBox x:Name="CourseTextBox1" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                            </StackPanel>
+                            <Button Content="Izbrisi polaznika" HorizontalAlignment="Center" VerticalAlignment="Center" Click="IzbrisiPolaznika" Margin="10"/>
+                            <TextBlock Name="ErrorPoruka2" Foreground="Red" Visibility="Collapsed" Margin="10" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Third Card -->
+        <Border Grid.Column="2" CornerRadius="10" BorderThickness="1" Margin="10" Opacity="0.9"
+        MouseLeftButtonUp="Card_Click" Tag="Card 3" Cursor="Hand" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <ScaleTransform x:Name="Card3Scale" ScaleX="1"/>
+            </Border.RenderTransform>
+
+            <Border.Resources>
+                <!-- Flip Animation for Card 3 -->
+                <Storyboard x:Key="FlipAnimationCard3">
+                    <DoubleAnimation Storyboard.TargetName="Card3Scale" 
+                     Storyboard.TargetProperty="ScaleX"
+                     To="0" Duration="0:0:0.2" AutoReverse="False" Completed="FlipHalfwayCard3"/>
+                </Storyboard>
+            </Border.Resources>
+
+            <Grid>
+                <!-- Front Side (Card 3) -->
+                <Grid x:Name="FrontSide3">
+                    <Border CornerRadius="10" Padding="10">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#060531" Offset="0"/>
+                                <GradientStop Color="#1B1448" Offset="0.75"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                <GradientStop Color="#1B1448" Offset="0"/>
+                                <GradientStop Color="#060531" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
+                            <TextBlock Text="Promjena polaznika" Foreground="White" FontSize="20" FontWeight="Bold" FontFamily="Montserrat" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Back Side (Card 3) -->
+                <Grid x:Name="BackSide3" Visibility="Hidden">
+                    <Border CornerRadius="10" Padding="10">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#060531" Offset="0"/>
+                                <GradientStop Color="#1B1448" Offset="0.75"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                <GradientStop Color="#1B1448" Offset="0"/>
+                                <GradientStop Color="#060531" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+                            <!--  Obavijest  -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                                <TextBlock Text="Za promjenu polaznika ID mora ostati isti" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0" HorizontalAlignment="Left" FontSize="16"/>
+                                
+                            </StackPanel>
+                            <!-- Name Input -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <TextBlock Text="Ime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,32,0" HorizontalAlignment="Left"/>
+                                <TextBox x:Name="NameTextBox2" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                            </StackPanel>
+                            <!-- Surname Input -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <TextBlock Text="Prezime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <TextBox x:Name="SurnameTextBox2" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                            </StackPanel>
+
+                            <!-- ID Input -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <TextBlock Text="ID:" Foreground="White" VerticalAlignment="Center" Margin="0,0,40,0"/>
+                                <TextBox x:Name="IdTextBox2" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                            </StackPanel>
+
+                            <!-- Tečaj Input -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                                <TextBlock Text="Tečaj:" Foreground="White" VerticalAlignment="Center" Margin="0,0,26,0"/>
+                                <TextBox x:Name="CourseTextBox2" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                            </StackPanel>
+                            <Button Content="Promijeni polaznika" HorizontalAlignment="Center" VerticalAlignment="Center" Click="PromijeniPolaznika" Margin="10"/>
+
+                            <TextBlock Name="ErrorPoruka" Foreground="Red" Visibility="Collapsed" Margin="10" />
+                            
+
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+
+
     </Grid>
 </UserControl>
