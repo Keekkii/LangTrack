@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Data.SqlClient;
+using WpfApp2.Repositories;
 
 namespace WpfApp2.View
 {
@@ -93,34 +94,67 @@ namespace WpfApp2.View
             isFlippedCard3 = !isFlippedCard3; // Toggle state
         }
 
-        private void DodajPolaznika (object sender, RoutedEventArgs e)
+        private void DodajPolaznika(object sender, RoutedEventArgs e)
         {
-            // Get the value from the ID TextBox
+            // Get the values from the TextBoxes
             string idText = IdTextBox.Text;
+            string name = NameTextBox.Text;
+            string surname = SurnameTextBox.Text;
+            string course = CourseTextBox.Text;
 
             // Check if the ID only contains digits
             if (System.Text.RegularExpressions.Regex.IsMatch(idText, @"^\d+$"))
             {
-                // If valid, hide the error message and continue
+                // Hide error message
                 ErrorPoruka1.Visibility = Visibility.Collapsed;
-                MessageBox.Show("Polaznik je upisan u bazu podataka.");
 
-                // Optionally clear the textboxes if everything is valid
-                NameTextBox.Clear();
-                SurnameTextBox.Clear();
-                IdTextBox.Clear();
-                CourseTextBox.Clear();
+                // Convert ID to integer
+                int id = int.Parse(idText);
+
+                // Create an instance of PolaznikRepository to interact with the database
+                PolaznikRepository polaznikRepo = new PolaznikRepository();
+
+                // Check if the Polaznik already exists
+                if (polaznikRepo.IsPolaznikExists(id))
+                {
+                    // If the Polaznik exists, show an error message
+                    MessageBox.Show("Polaznik sa ovim ID-om već postoji u bazi podataka!");
+                }
+                else
+                {
+                    // If the Polaznik doesn't exist, add it to the database
+                    bool isInserted = polaznikRepo.AddPolaznikToDatabase(id, name, surname, course);
+
+                    if (isInserted)
+                    {
+                        // Show success message
+                        MessageBox.Show("Polaznik je upisan u bazu podataka.");
+
+                        // Optionally clear textboxes
+                        NameTextBox.Clear();
+                        SurnameTextBox.Clear();
+                        IdTextBox.Clear();
+                        CourseTextBox.Clear();
+                    }
+                    else
+                    {
+                        // Show error if insertion fails
+                        MessageBox.Show("Greška pri unosu u bazu podataka.");
+                    }
+                }
             }
             else
             {
-                // If invalid, show the error message
+                // If the ID is invalid (not a number), show an error message
                 ErrorPoruka1.Visibility = Visibility.Visible;
                 ErrorPoruka1.Text = "ID mora sadržavati samo brojke";
-                // Do not clear the textboxes in case of error
             }
         }
 
-        private void IzbrisiPolaznika (object sender, RoutedEventArgs e)
+
+
+
+        private void IzbrisiPolaznika(object sender, RoutedEventArgs e)
         {
             // Get the value from the ID TextBox
             string idText = IdTextBox1.Text;
@@ -128,11 +162,28 @@ namespace WpfApp2.View
             // Check if the ID only contains digits
             if (System.Text.RegularExpressions.Regex.IsMatch(idText, @"^\d+$"))
             {
-                // If valid, hide the error message and continue
+                // If valid, hide the error message
                 ErrorPoruka2.Visibility = Visibility.Collapsed;
-                MessageBox.Show("Polaznik je izbrisan iz baze podataka.");
 
-                // Optionally clear the textboxes if everything is valid
+                // Convert the ID to an integer
+                int id = int.Parse(idText);
+
+                // Create an instance of PolaznikRepository
+                PolaznikRepository polaznikRepository = new PolaznikRepository();
+
+                // Call the method to delete the Polaznik
+                bool isDeleted = polaznikRepository.DeletePolaznikById(id);
+
+                if (isDeleted)
+                {
+                    MessageBox.Show("Polaznik je izbrisan iz baze podataka.");
+                }
+                else
+                {
+                    MessageBox.Show("Polaznik nije pronađen.");
+                }
+
+                // Optionally clear the textboxes
                 NameTextBox1.Clear();
                 SurnameTextBox1.Clear();
                 IdTextBox1.Clear();
@@ -143,11 +194,11 @@ namespace WpfApp2.View
                 // If invalid, show the error message
                 ErrorPoruka2.Visibility = Visibility.Visible;
                 ErrorPoruka2.Text = "ID mora sadržavati samo brojke";
-                // Do not clear the textboxes in case of error
             }
         }
 
-        private void PromijeniPolaznika (object sender, RoutedEventArgs e)
+
+        private void PromijeniPolaznika(object sender, RoutedEventArgs e)
         {
             // Get the value from the ID TextBox
             string idText = IdTextBox2.Text;
@@ -155,11 +206,30 @@ namespace WpfApp2.View
             // Check if the ID only contains digits
             if (System.Text.RegularExpressions.Regex.IsMatch(idText, @"^\d+$"))
             {
-                // If valid, hide the error message and continue
-                ErrorPoruka.Visibility = Visibility.Collapsed;
-                MessageBox.Show("Podaci su ažurirani.");
+                // Convert the ID to an integer
+                int id = int.Parse(idText);
 
-                // Optionally clear the textboxes if everything is valid
+                // Get the values from the other TextBoxes
+                string name = NameTextBox2.Text;
+                string surname = SurnameTextBox2.Text;
+                string course = CourseTextBox2.Text;
+
+                // Create an instance of PolaznikRepository
+                PolaznikRepository polaznikRepository = new PolaznikRepository();
+
+                // Call the method to update the Polaznik
+                bool isUpdated = polaznikRepository.UpdatePolaznik(id, name, surname, course);
+
+                if (isUpdated)
+                {
+                    MessageBox.Show("Podaci su ažurirani.");
+                }
+                else
+                {
+                    MessageBox.Show("Polaznik nije pronađen ili nije ažuriran.");
+                }
+
+                // Optionally clear the textboxes
                 NameTextBox2.Clear();
                 SurnameTextBox2.Clear();
                 IdTextBox2.Clear();
@@ -170,11 +240,11 @@ namespace WpfApp2.View
                 // If invalid, show the error message
                 ErrorPoruka.Visibility = Visibility.Visible;
                 ErrorPoruka.Text = "ID mora sadržavati samo brojke";
-                // Do not clear the textboxes in case of error
             }
         }
 
-       
+
+
 
 
 

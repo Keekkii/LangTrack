@@ -12,7 +12,7 @@ namespace WpfApp2.Repositories
         private readonly string _connectionString;
         public RepositoryBase()
         {
-            _connectionString = "Server=(local); Database=MVVMLoginDb; Integrated Security = true; TrustServerCertificate=True";
+            _connectionString = "Server=LAPTOP-FASTSSH6\\SQLEXPRESS; Database=MVVMLoginDb; Integrated Security = true; TrustServerCertificate=True";
         }
 
         protected SqlConnection GetConnection() {
