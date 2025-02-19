@@ -12,17 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp2.ViewModel;
 
 namespace WpfApp2.View
 {
     /// <summary>
-    /// Interaction logic for HomeView.xaml
+    /// Interaction logic for StatistikaView.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class StatistikaView : UserControl
     {
-        public HomeView()
+        public StatistikaView()
         {
             InitializeComponent();
+            DataContext = new StatistikaViewModel();
         }
     }
 }

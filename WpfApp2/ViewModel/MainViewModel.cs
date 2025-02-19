@@ -57,6 +57,10 @@ namespace WpfApp2.ViewModel
         public ICommand ShowHomeViewCommand { get; }
         public ICommand ShowCustomerViewCommand { get; }
 
+        public ICommand ShowStatistikaViewCommand { get; }
+
+        public ICommand ShowTablicaViewCommand { get; }
+
         public MainViewModel()
         {
             userRepository = new UserRepository();
@@ -65,6 +69,8 @@ namespace WpfApp2.ViewModel
             //Initilize commands
             ShowHomeViewCommand = new ViewModelCommand(ExecuteShowHomeViewCommand);
             ShowCustomerViewCommand = new ViewModelCommand(ExecuteShowCustomerViewCommand);
+            ShowStatistikaViewCommand = new ViewModelCommand(ExecuteShowStatistikaViewCommand);
+            ShowTablicaViewCommand = new ViewModelCommand(ExecuteShowTablicaViewCommand);
 
             //Default view
             ExecuteShowHomeViewCommand(null);
@@ -75,15 +81,29 @@ namespace WpfApp2.ViewModel
         private void ExecuteShowCustomerViewCommand(object obj)
         {
             CurrentChildView = new CustomerViewModel();
-            Caption = "Customers";
+            Caption = "Polaznik";
             Icon = IconChar.UserGroup;
         }
 
         private void ExecuteShowHomeViewCommand(object obj)
         {
             CurrentChildView = new HomeViewModel();
-            Caption = "Dashboard";
-            Icon = IconChar.Home;
+            Caption = "Predavač";
+            Icon = IconChar.GraduationCap;
+        }
+
+        private void ExecuteShowStatistikaViewCommand(object obj)
+        {
+            CurrentChildView = new StatistikaViewModel();
+            Caption = "Statistika";
+            Icon = IconChar.PieChart;
+        }
+
+        private void ExecuteShowTablicaViewCommand(object obj)
+        {
+            CurrentChildView = new TablicaViewModel();
+            Caption = "Tablica";
+            Icon = IconChar.Table;
         }
 
         private void LoadCurrentUserData()

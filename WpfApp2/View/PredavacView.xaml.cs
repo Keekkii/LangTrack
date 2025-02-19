@@ -9,17 +9,18 @@ using WpfApp2.Repositories;
 
 namespace WpfApp2.View
 {
-    public partial class CustomerView : UserControl
+    /// <summary>
+    /// Interaction logic for HomeView.xaml
+    /// </summary>
+    public partial class PredavacView : UserControl
     {
         private bool isFlippedCard1 = false; // Track card state for Card 1
         private bool isFlippedCard2 = false; // Track card state for Card 2
         private bool isFlippedCard3 = false; // Track card state for Card 3
-
-        public CustomerView()
+        public PredavacView()
         {
             InitializeComponent();
         }
-
         private void Card_Click(object sender, MouseButtonEventArgs e)
         {
             if (sender is Border clickedCard)
@@ -39,7 +40,6 @@ namespace WpfApp2.View
                 }
             }
         }
-
         // Flip method for Card 1
         private void FlipHalfwayCard1(object sender, EventArgs e)
         {
@@ -93,8 +93,7 @@ namespace WpfApp2.View
 
             isFlippedCard3 = !isFlippedCard3; // Toggle state
         }
-
-        private void DodajPolaznika(object sender, RoutedEventArgs e)
+        private void DodajPredavaca(object sender, RoutedEventArgs e)
         {
             // Get the values from the TextBoxes
             string idText = IdTextBox.Text;
@@ -112,23 +111,23 @@ namespace WpfApp2.View
                 int id = int.Parse(idText);
 
                 // Create an instance of PolaznikRepository to interact with the database
-                PolaznikRepository polaznikRepo = new PolaznikRepository();
+                PredavacRepository predavacRepo = new PredavacRepository();
 
                 // Check if the Polaznik already exists
-                if (polaznikRepo.IsPolaznikExists(id))
+                if (predavacRepo.IsPredavacExists(id))
                 {
                     // If the Polaznik exists, show an error message
-                    MessageBox.Show("Polaznik sa ovim ID-om već postoji u bazi podataka!");
+                    MessageBox.Show("Predavač sa ovim ID-om već postoji u bazi podataka!");
                 }
                 else
                 {
                     // If the Polaznik doesn't exist, add it to the database
-                    bool isInserted = polaznikRepo.AddPolaznikToDatabase(id, name, surname, course);
+                    bool isInserted = predavacRepo.AddPredavacToDatabase(id, name, surname, course);
 
                     if (isInserted)
                     {
                         // Show success message
-                        MessageBox.Show("Polaznik je upisan u bazu podataka.");
+                        MessageBox.Show("Predavač je upisan u bazu podataka.");
 
                         // Optionally clear textboxes
                         NameTextBox.Clear();
@@ -154,7 +153,7 @@ namespace WpfApp2.View
 
 
 
-        private void IzbrisiPolaznika(object sender, RoutedEventArgs e)
+        private void IzbrisiPredavaca(object sender, RoutedEventArgs e)
         {
             // Get the value from the ID TextBox
             string idText = IdTextBox1.Text;
@@ -169,18 +168,18 @@ namespace WpfApp2.View
                 int id = int.Parse(idText);
 
                 // Create an instance of PolaznikRepository
-                PolaznikRepository polaznikRepository = new PolaznikRepository();
+                PredavacRepository predavacRepository = new PredavacRepository();
 
                 // Call the method to delete the Polaznik
-                bool isDeleted = polaznikRepository.DeletePolaznikById(id);
+                bool isDeleted = predavacRepository.DeletePredavacById(id);
 
                 if (isDeleted)
                 {
-                    MessageBox.Show("Polaznik je izbrisan iz baze podataka.");
+                    MessageBox.Show("Predavač je izbrisan iz baze podataka.");
                 }
                 else
                 {
-                    MessageBox.Show("Polaznik nije pronađen.");
+                    MessageBox.Show("Predavač nije pronađen.");
                 }
 
                 // Optionally clear the textboxes
@@ -198,7 +197,7 @@ namespace WpfApp2.View
         }
 
 
-        private void PromijeniPolaznika(object sender, RoutedEventArgs e)
+        private void PromijeniPredavaca(object sender, RoutedEventArgs e)
         {
             // Get the value from the ID TextBox
             string idText = IdTextBox2.Text;
@@ -215,10 +214,10 @@ namespace WpfApp2.View
                 string course = CourseTextBox2.Text;
 
                 // Create an instance of PolaznikRepository
-                PolaznikRepository polaznikRepository = new PolaznikRepository();
+                PredavacRepository predavacRepository = new PredavacRepository();
 
                 // Call the method to update the Polaznik
-                bool isUpdated = polaznikRepository.UpdatePolaznik(id, name, surname, course);
+                bool isUpdated = predavacRepository.UpdatePredavac(id, name, surname, course);
 
                 if (isUpdated)
                 {
@@ -226,7 +225,7 @@ namespace WpfApp2.View
                 }
                 else
                 {
-                    MessageBox.Show("Polaznik nije pronađen ili nije ažuriran.");
+                    MessageBox.Show("Predavač nije pronađen ili nije ažuriran.");
                 }
 
                 // Optionally clear the textboxes
@@ -242,15 +241,5 @@ namespace WpfApp2.View
                 ErrorPoruka.Text = "ID mora sadržavati samo brojke";
             }
         }
-
-
-
-
-
-
-
-
-
-
     }
 }
