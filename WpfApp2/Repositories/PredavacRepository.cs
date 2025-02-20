@@ -22,7 +22,7 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT COUNT(*) FROM dbo.Predavac WHERE Id = @id";  // Ensure dbo is there
+                    command.CommandText = "SELECT COUNT(*) FROM Predavac WHERE Id = @id"; 
                     command.Parameters.Add("@id", DbType.Int32).Value = id;
 
                     int count = Convert.ToInt32(command.ExecuteScalar());
@@ -47,7 +47,7 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO dbo.Predavac (Id, Name, Surname, Subject) VALUES (@id, @name, @surname, @subject)";
+                    command.CommandText = "INSERT INTO Predavac (Id, Name, Surname, Subject) VALUES (@id, @name, @surname, @subject)";
                     command.Parameters.Add("@id", DbType.Int32).Value = id;
                     command.Parameters.Add("@name", DbType.String).Value = name;
                     command.Parameters.Add("@surname", DbType.String).Value = surname;
@@ -73,7 +73,7 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "DELETE FROM dbo.Predavac WHERE Id = @id";
+                    command.CommandText = "DELETE FROM Predavac WHERE Id = @id";
                     command.Parameters.Add("@id", DbType.Int32).Value = id;
 
                     int result = command.ExecuteNonQuery();
@@ -96,7 +96,7 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "UPDATE dbo.Predavac SET Name = @name, Surname = @surname, Subject = @subject WHERE Id = @id";
+                    command.CommandText = "UPDATE Predavac SET Name = @name, Surname = @surname, Subject = @subject WHERE Id = @id";
                     command.Parameters.Add("@id", DbType.Int32).Value = id;
                     command.Parameters.Add("@name", DbType.String).Value = name;
                     command.Parameters.Add("@surname", DbType.String).Value = surname;
@@ -121,7 +121,7 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT COUNT(*) FROM dbo.Predavac"; // Simple count query
+                    command.CommandText = "SELECT COUNT(*) FROM Predavac"; // Simple count query
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
                 catch (Exception ex)

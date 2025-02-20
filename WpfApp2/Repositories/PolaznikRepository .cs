@@ -23,7 +23,7 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT COUNT(*) FROM dbo.Polaznik WHERE Id = @id";  // Ensure dbo is there
+                    command.CommandText = "SELECT COUNT(*) FROM Polaznik WHERE Id = @id";  
                     command.Parameters.Add("@id", DbType.Int32).Value = id;
 
                     int count = Convert.ToInt32(command.ExecuteScalar());
@@ -51,7 +51,7 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO dbo.Polaznik (Id, Name, Surname, Course) VALUES (@id, @name, @surname, @course)"; // Use Polaznik here
+                    command.CommandText = "INSERT INTO Polaznik (Id, Name, Surname, Course) VALUES (@id, @name, @surname, @course)"; // Use Polaznik here
                     command.Parameters.Add("@id", DbType.Int32).Value = id;
                     command.Parameters.Add("@name", DbType.String).Value = name;
                     command.Parameters.Add("@surname", DbType.String).Value = surname;
@@ -77,7 +77,7 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "DELETE FROM dbo.Polaznik WHERE Id = @id";
+                    command.CommandText = "DELETE FROM Polaznik WHERE Id = @id";
                     command.Parameters.Add("@id", DbType.Int32).Value = id;
 
                     int result = command.ExecuteNonQuery(); // Returns number of rows affected
@@ -101,7 +101,7 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "UPDATE dbo.Polaznik SET Name = @name, Surname = @surname, Course = @course WHERE Id = @id";
+                    command.CommandText = "UPDATE Polaznik SET Name = @name, Surname = @surname, Course = @course WHERE Id = @id";
                     command.Parameters.Add("@id", DbType.Int32).Value = id;
                     command.Parameters.Add("@name", DbType.String).Value = name;
                     command.Parameters.Add("@surname", DbType.String).Value = surname;
@@ -127,7 +127,7 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT COUNT(*) FROM dbo.Polaznik"; // Simple count query
+                    command.CommandText = "SELECT COUNT(*) FROM Polaznik"; // Simple count query
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
                 catch (Exception ex)
