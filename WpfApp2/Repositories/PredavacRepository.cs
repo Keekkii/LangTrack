@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,16 +16,16 @@ namespace WpfApp2.Repositories
         {
             bool exists = false;
             using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            using (var command = new SQLiteCommand())
             {
                 try
                 {
                     connection.Open();
                     command.Connection = connection;
                     command.CommandText = "SELECT COUNT(*) FROM dbo.Predavac WHERE Id = @id";  // Ensure dbo is there
-                    command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                    command.Parameters.Add("@id", DbType.Int32).Value = id;
 
-                    int count = (int)command.ExecuteScalar();
+                    int count = Convert.ToInt32(command.ExecuteScalar());
                     exists = count > 0;
                 }
                 catch (Exception ex)
@@ -39,17 +41,17 @@ namespace WpfApp2.Repositories
         public bool AddPredavacToDatabase(int id, string name, string surname, string subject)
         {
             using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            using (var command = new SQLiteCommand())
             {
                 try
                 {
                     connection.Open();
                     command.Connection = connection;
                     command.CommandText = "INSERT INTO dbo.Predavac (Id, Name, Surname, Subject) VALUES (@id, @name, @surname, @subject)";
-                    command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
-                    command.Parameters.Add("@name", System.Data.SqlDbType.NVarChar).Value = name;
-                    command.Parameters.Add("@surname", System.Data.SqlDbType.NVarChar).Value = surname;
-                    command.Parameters.Add("@subject", System.Data.SqlDbType.NVarChar).Value = subject;
+                    command.Parameters.Add("@id", DbType.Int32).Value = id;
+                    command.Parameters.Add("@name", DbType.String).Value = name;
+                    command.Parameters.Add("@surname", DbType.String).Value = surname;
+                    command.Parameters.Add("@subject", DbType.String).Value = subject;
 
                     int result = command.ExecuteNonQuery();
                     return result > 0;
@@ -65,14 +67,14 @@ namespace WpfApp2.Repositories
         public bool DeletePredavacById(int id)
         {
             using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            using (var command = new SQLiteCommand())
             {
                 try
                 {
                     connection.Open();
                     command.Connection = connection;
                     command.CommandText = "DELETE FROM dbo.Predavac WHERE Id = @id";
-                    command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                    command.Parameters.Add("@id", DbType.Int32).Value = id;
 
                     int result = command.ExecuteNonQuery();
                     return result > 0;
@@ -88,17 +90,17 @@ namespace WpfApp2.Repositories
         public bool UpdatePredavac(int id, string name, string surname, string subject)
         {
             using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            using (var command = new SQLiteCommand())
             {
                 try
                 {
                     connection.Open();
                     command.Connection = connection;
                     command.CommandText = "UPDATE dbo.Predavac SET Name = @name, Surname = @surname, Subject = @subject WHERE Id = @id";
-                    command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
-                    command.Parameters.Add("@name", System.Data.SqlDbType.NVarChar).Value = name;
-                    command.Parameters.Add("@surname", System.Data.SqlDbType.NVarChar).Value = surname;
-                    command.Parameters.Add("@subject", System.Data.SqlDbType.NVarChar).Value = subject;
+                    command.Parameters.Add("@id", DbType.Int32).Value = id;
+                    command.Parameters.Add("@name", DbType.String).Value = name;
+                    command.Parameters.Add("@surname", DbType.String).Value = surname;
+                    command.Parameters.Add("@subject", DbType.String).Value = subject;
 
                     int result = command.ExecuteNonQuery();
                     return result > 0;
@@ -113,14 +115,14 @@ namespace WpfApp2.Repositories
         public int GetPredavaciCount()
         {
             using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            using (var command = new SQLiteCommand())
             {
                 try
                 {
                     connection.Open();
                     command.Connection = connection;
                     command.CommandText = "SELECT COUNT(*) FROM dbo.Predavac"; // Simple count query
-                    return (int)command.ExecuteScalar();
+                    return Convert.ToInt32(command.ExecuteScalar());
                 }
                 catch (Exception ex)
                 {

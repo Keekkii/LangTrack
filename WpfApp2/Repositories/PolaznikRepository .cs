@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,16 +17,16 @@ namespace WpfApp2.Repositories
         {
             bool exists = false;
             using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            using (var command = new SQLiteCommand())
             {
                 try
                 {
                     connection.Open();
                     command.Connection = connection;
                     command.CommandText = "SELECT COUNT(*) FROM dbo.Polaznik WHERE Id = @id";  // Ensure dbo is there
-                    command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                    command.Parameters.Add("@id", DbType.Int32).Value = id;
 
-                    int count = (int)command.ExecuteScalar();
+                    int count = Convert.ToInt32(command.ExecuteScalar());
                     exists = count > 0;
                 }
                 catch (Exception ex)
@@ -43,17 +45,17 @@ namespace WpfApp2.Repositories
         public bool AddPolaznikToDatabase(int id, string name, string surname, string course)
         {
             using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            using (var command = new SQLiteCommand())
             {
                 try
                 {
                     connection.Open();
                     command.Connection = connection;
                     command.CommandText = "INSERT INTO dbo.Polaznik (Id, Name, Surname, Course) VALUES (@id, @name, @surname, @course)"; // Use Polaznik here
-                    command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
-                    command.Parameters.Add("@name", System.Data.SqlDbType.NVarChar).Value = name;
-                    command.Parameters.Add("@surname", System.Data.SqlDbType.NVarChar).Value = surname;
-                    command.Parameters.Add("@course", System.Data.SqlDbType.NVarChar).Value = course;
+                    command.Parameters.Add("@id", DbType.Int32).Value = id;
+                    command.Parameters.Add("@name", DbType.String).Value = name;
+                    command.Parameters.Add("@surname", DbType.String).Value = surname;
+                    command.Parameters.Add("@course", DbType.String).Value = course;
 
                     int result = command.ExecuteNonQuery(); // Returns number of rows affected
                     return result > 0; // If rows are affected, insertion was successful
@@ -69,14 +71,14 @@ namespace WpfApp2.Repositories
         public bool DeletePolaznikById(int id)
         {
             using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            using (var command = new SQLiteCommand())
             {
                 try
                 {
                     connection.Open();
                     command.Connection = connection;
                     command.CommandText = "DELETE FROM dbo.Polaznik WHERE Id = @id";
-                    command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                    command.Parameters.Add("@id", DbType.Int32).Value = id;
 
                     int result = command.ExecuteNonQuery(); // Returns number of rows affected
                     return result > 0; // If rows are affected, deletion was successful
@@ -93,17 +95,17 @@ namespace WpfApp2.Repositories
         public bool UpdatePolaznik(int id, string name, string surname, string course)
         {
             using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            using (var command = new SQLiteCommand())
             {
                 try
                 {
                     connection.Open();
                     command.Connection = connection;
                     command.CommandText = "UPDATE dbo.Polaznik SET Name = @name, Surname = @surname, Course = @course WHERE Id = @id";
-                    command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
-                    command.Parameters.Add("@name", System.Data.SqlDbType.NVarChar).Value = name;
-                    command.Parameters.Add("@surname", System.Data.SqlDbType.NVarChar).Value = surname;
-                    command.Parameters.Add("@course", System.Data.SqlDbType.NVarChar).Value = course;
+                    command.Parameters.Add("@id", DbType.Int32).Value = id;
+                    command.Parameters.Add("@name", DbType.String).Value = name;
+                    command.Parameters.Add("@surname", DbType.String).Value = surname;
+                    command.Parameters.Add("@course", DbType.String).Value = course;
 
                     int result = command.ExecuteNonQuery(); // Returns number of rows affected
                     return result > 0; // If rows are affected, update was successful
@@ -119,14 +121,14 @@ namespace WpfApp2.Repositories
         public int GetPolazniciCount()
         {
             using (var connection = GetConnection())
-            using (var command = new SqlCommand())
+            using (var command = new SQLiteCommand())
             {
                 try
                 {
                     connection.Open();
                     command.Connection = connection;
                     command.CommandText = "SELECT COUNT(*) FROM dbo.Polaznik"; // Simple count query
-                    return (int)command.ExecuteScalar();
+                    return Convert.ToInt32(command.ExecuteScalar());
                 }
                 catch (Exception ex)
                 {
