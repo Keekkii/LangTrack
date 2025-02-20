@@ -37,7 +37,7 @@ namespace WpfApp2.Repositories
             return exists;
         }
 
-        // Add Predavac to the database
+        // Dodavanje predavaca u bazu
         public bool AddPredavacToDatabase(int id, string name, string surname, string subject)
         {
             using (var connection = GetConnection())
@@ -54,7 +54,7 @@ namespace WpfApp2.Repositories
                     command.Parameters.Add("@subject", DbType.String).Value = subject;
 
                     int result = command.ExecuteNonQuery();
-                    return result > 0;
+                    return result > 0; //Uvjet uspjesnosti
                 }
                 catch (Exception ex)
                 {
@@ -63,7 +63,7 @@ namespace WpfApp2.Repositories
             }
         }
 
-        // Delete Predavac from the database
+        // Brisanje predavaca 
         public bool DeletePredavacById(int id)
         {
             using (var connection = GetConnection())
@@ -77,7 +77,7 @@ namespace WpfApp2.Repositories
                     command.Parameters.Add("@id", DbType.Int32).Value = id;
 
                     int result = command.ExecuteNonQuery();
-                    return result > 0;
+                    return result > 0; //Uvjet uspjesnosti
                 }
                 catch (Exception ex)
                 {
@@ -86,7 +86,7 @@ namespace WpfApp2.Repositories
             }
         }
 
-        // Update Predavac data in the database
+        // Promjena predavaca
         public bool UpdatePredavac(int id, string name, string surname, string subject)
         {
             using (var connection = GetConnection())
@@ -121,7 +121,7 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT COUNT(*) FROM Predavac"; // Simple count query
+                    command.CommandText = "SELECT COUNT(*) FROM Predavac"; //Broj predavaca u bazi, bitno za statistiku
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
                 catch (Exception ex)

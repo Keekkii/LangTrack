@@ -7,25 +7,25 @@
              mc:Ignorable="d"
              d:DesignHeight="468.876" d:DesignWidth="800">
     <Grid>
-        <!-- Grid for Column Definitions (3 columns for 3 cards) -->
+        <!-- Grid od 3 stupca za 3 kartice -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- First Card -->
+        <!-- Prva kartica -->
         <Border Grid.Column="0" CornerRadius="10" BorderThickness="1" Margin="10" Opacity="0.9"
                 Cursor="Hand" RenderTransformOrigin="0.5,0.5" Tag="Card 1"
                 MouseLeftButtonUp="Card_Click">
 
-            <!-- Apply a RotateTransform to the whole card -->
+            <!-- RotateTransform svojstvo -->
             <Border.RenderTransform>
                 <ScaleTransform x:Name="Card1Scale" ScaleX="1"/>
             </Border.RenderTransform>
 
             <Border.Resources>
-                <!-- Flip Animation -->
+                <!-- Flip Animacija -->
                 <Storyboard x:Key="FlipAnimationCard1">
                     <DoubleAnimation Storyboard.TargetName="Card1Scale" 
                      Storyboard.TargetProperty="ScaleX"
@@ -33,9 +33,8 @@
                 </Storyboard>
             </Border.Resources>
 
-            <!-- This Grid will contain both Front and Back sides -->
             <Grid>
-                <!-- Front Side (Matches the other two cards) -->
+                <!--Prednja strana -->
                 <Grid x:Name="FrontSide">
                     <Border CornerRadius="10" Padding="10">
                         <Border.Background>
@@ -53,7 +52,7 @@
                     </Border>
                 </Grid>
 
-                <!-- Back Side (Same gradient background, no text) -->
+                <!-- Poledina -->
                 <Grid x:Name="BackSide" Visibility="Hidden">
                     <Border CornerRadius="10" Padding="10">
                         <Border.Background>
@@ -63,27 +62,26 @@
                             </LinearGradientBrush>
                         </Border.Background>
 
-                        <!-- StackPanel centered but with consistent TextBox alignment -->
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-                            <!-- Name Input -->
+                            <!-- Uois imena -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Ime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,32,0" HorizontalAlignment="Left"/>
                                 <TextBox x:Name="NameTextBox" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
-                            <!-- Surname Input -->
+                            <!-- Upis prezimena -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Prezime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
                                 <TextBox x:Name="SurnameTextBox" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
-                            <!-- ID Input -->
+                            <!-- ID upis -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="ID:" Foreground="White" VerticalAlignment="Center" Margin="0,0,40,0"/>
                                 <TextBox x:Name="IdTextBox" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
-                            <!-- Tečaj Input -->
+                            <!-- Tecaj upis -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Tečaj:" Foreground="White" VerticalAlignment="Center" Margin="0,0,26,0"/>
                                 <TextBox x:Name="CourseTextBox" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
@@ -98,7 +96,7 @@
             </Grid>
         </Border>
 
-        <!-- Second Card -->
+        <!-- Druga kartica, isti kod -->
         <Border Grid.Column="1" CornerRadius="10" BorderThickness="1" Margin="10" Opacity="0.9"
         MouseLeftButtonUp="Card_Click" Tag="Card 2" Cursor="Hand" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
@@ -106,7 +104,6 @@
             </Border.RenderTransform>
 
             <Border.Resources>
-                <!-- Flip Animation for Card 2 -->
                 <Storyboard x:Key="FlipAnimationCard2">
                     <DoubleAnimation Storyboard.TargetName="Card2Scale" 
                      Storyboard.TargetProperty="ScaleX"
@@ -115,7 +112,7 @@
             </Border.Resources>
 
             <Grid>
-                <!-- Front Side (Card 2) -->
+                <!-- Prednja strana -->
                 <Grid x:Name="FrontSide2">
                     <Border CornerRadius="10" Padding="10">
                         <Border.Background>
@@ -132,7 +129,7 @@
                     </Border>
                 </Grid>
 
-                <!-- Back Side (Card 2) -->
+                <!-- Backside -->
                 <Grid x:Name="BackSide2" Visibility="Hidden">
                     <Border CornerRadius="10" Padding="10">
                         <Border.Background>
@@ -142,25 +139,25 @@
                             </LinearGradientBrush>
                         </Border.Background>
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-                            <!-- Name Input -->
+                            <!-- Ime Brisanje -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Ime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,33,0" HorizontalAlignment="Left"/>
                                 <TextBox x:Name="NameTextBox1" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
-                            <!-- Surname Input -->
+                            <!-- Prezime brisanje -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Prezime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
                                 <TextBox x:Name="SurnameTextBox1" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
-                            <!-- ID Input -->
+                            <!-- ID b-->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="ID:" Foreground="White" VerticalAlignment="Center" Margin="0,0,41,0"/>
                                 <TextBox x:Name="IdTextBox1" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
-                            <!-- Tečaj Input -->
+                            <!-- Tecaj b -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Tečaj:" Foreground="White" VerticalAlignment="Center" Margin="0,0,26,0"/>
                                 <TextBox x:Name="CourseTextBox1" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
@@ -173,7 +170,7 @@
             </Grid>
         </Border>
 
-        <!-- Third Card -->
+        <!-- Treca kartica -->
         <Border Grid.Column="2" CornerRadius="10" BorderThickness="1" Margin="10" Opacity="0.9"
         MouseLeftButtonUp="Card_Click" Tag="Card 3" Cursor="Hand" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
@@ -181,7 +178,6 @@
             </Border.RenderTransform>
 
             <Border.Resources>
-                <!-- Flip Animation for Card 3 -->
                 <Storyboard x:Key="FlipAnimationCard3">
                     <DoubleAnimation Storyboard.TargetName="Card3Scale" 
                      Storyboard.TargetProperty="ScaleX"
@@ -190,7 +186,7 @@
             </Border.Resources>
 
             <Grid>
-                <!-- Front Side (Card 3) -->
+                <!-- Prednja -->
                 <Grid x:Name="FrontSide3">
                     <Border CornerRadius="10" Padding="10">
                         <Border.Background>
@@ -206,7 +202,6 @@
                     </Border>
                 </Grid>
 
-                <!-- Back Side (Card 3) -->
                 <Grid x:Name="BackSide3" Visibility="Hidden">
                     <Border CornerRadius="10" Padding="10">
                         <Border.Background>
@@ -221,24 +216,24 @@
                                 <TextBlock Text="Za promjenu polaznika ID mora ostati isti" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0" HorizontalAlignment="Left" FontSize="16"/>
                                 
                             </StackPanel>
-                            <!-- Name Input -->
+                            <!-- Ime izmjena -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Ime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,32,0" HorizontalAlignment="Left"/>
                                 <TextBox x:Name="NameTextBox2" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
-                            <!-- Surname Input -->
+                            <!-- Prezime izmjena -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Prezime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
                                 <TextBox x:Name="SurnameTextBox2" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
-                            <!-- ID Input -->
+                            <!-- ID izmjena -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="ID:" Foreground="White" VerticalAlignment="Center" Margin="0,0,40,0"/>
                                 <TextBox x:Name="IdTextBox2" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
-                            <!-- Tečaj Input -->
+                            <!-- Tečaj izmjena -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Tečaj:" Foreground="White" VerticalAlignment="Center" Margin="0,0,26,0"/>
                                 <TextBox x:Name="CourseTextBox2" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />

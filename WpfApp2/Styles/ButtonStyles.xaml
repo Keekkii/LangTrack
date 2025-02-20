@@ -18,7 +18,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <!-- Hover button -->
+        <!-- Hover gumb -->
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Margin" Value="0, 0, 0, 5"/>
@@ -27,7 +27,7 @@
                 <Setter Property="BorderBrush" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}"/>
             </Trigger>
             
-        <!-- Active button-->
+        <!-- Aktivan gumb -->
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Margin" Value="0, 0, 0, 5"/>
                 <Setter Property="Background" Value="{StaticResource panelActiveColor}"/>
@@ -37,7 +37,7 @@
         </Style.Triggers>
     </Style>
     
-    <!--Menu button icon-->
+    <!--Menu gumb ikona-->
     <Style x:Key="menuButtonIcon" TargetType="fa:IconImage">
         <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
         <Setter Property="Width" Value="22"/>
@@ -45,7 +45,7 @@
         <Setter Property="Margin" Value="35,0,20,0"/>
     </Style>
     
-    <!--Menu button text-->
+    <!--Meni gumb tekst-->
     <Style x:Key="menuButtonText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
         <Setter Property="FontFamily" Value="Montserrat"/>
@@ -55,7 +55,7 @@
     </Style>
 
     
-    <!-- Control bar button! -->
+    <!-- Kontrolni gumb -->
     <Style x:Key="controlButton" TargetType="Button">
         <Setter Property="Width" Value="35"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -71,7 +71,7 @@
             </Setter.Value>
         </Setter>
         
-        <!-- Hover button -->
+        <!-- Hover -->
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource panelActiveColor}"/>
@@ -80,7 +80,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--Menu button icon-->
+    <!--Ikona kontrolnog gumba-->
     <Style x:Key="controlButtonIcon" TargetType="fa:IconImage">
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
         <Setter Property="Width" Value="9"/>
@@ -88,7 +88,7 @@
     </Style>
 
 
-    <!-- Icon button! -->
+    <!--  -->
     <Style x:Key="iconButton" TargetType="Button">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Width" Value="25"/>
@@ -104,7 +104,7 @@
             </Setter.Value>
         </Setter>
 
-        <!-- Hover button -->
+        <!-- Hover -->
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource Self}}"/>
@@ -112,7 +112,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--Menu button icon-->
+    <!--Ikona -->
     <Style x:Key="iconButtonIcon" TargetType="fa:IconImage">
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
         <Setter Property="Width" Value="16"/>

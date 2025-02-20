@@ -14,9 +14,7 @@ using System.Windows.Shapes;
 
 namespace WpfApp2.View
 {
-    /// <summary>
-    /// Interaction logic for LoginView.xaml
-    /// </summary>
+
     public partial class LoginView : Window
     {
         public LoginView()
@@ -24,7 +22,7 @@ namespace WpfApp2.View
             InitializeComponent();
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e) //Omogucuje da se window dragga z left click
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e) //Omogucuje da se window dragga sa left click
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {

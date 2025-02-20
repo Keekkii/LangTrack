@@ -14,7 +14,7 @@
             </Border.Background>
 
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-                <!-- Predavaci Section -->
+                <!-- Broj predavaca i polaznika -->
                 <StackPanel Margin="20">
                     <TextBlock Text="Broj predavača:" FontSize="16" Foreground="{StaticResource titleColor2}" FontFamily="Montserrat"/>
                     <TextBlock Text="{Binding NumberOfPredavaci}" FontSize="20" FontWeight="SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Montserrat"/>
@@ -27,7 +27,7 @@
             </StackPanel>
         </Border>
 
-        <!-- Pie Chart Section -->
+        <!-- Graf -->
         <Border CornerRadius="10" MaxHeight="400" Margin="10">
             <Border.Background>
                 <LinearGradientBrush>
@@ -48,7 +48,7 @@
                     </lvc:PieChart.Series>
                 </lvc:PieChart>
 
-                <!-- Ratio (Omjer) Display Below Pie Chart -->
+                <!-- Omjer -->
                 <TextBlock Text="{Binding Omjer}"
                            FontSize="20"
                            FontWeight="SemiBold"

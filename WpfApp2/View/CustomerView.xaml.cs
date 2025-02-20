@@ -11,9 +11,9 @@ namespace WpfApp2.View
 {
     public partial class CustomerView : UserControl
     {
-        private bool isFlippedCard1 = false; // Track card state for Card 1
-        private bool isFlippedCard2 = false; // Track card state for Card 2
-        private bool isFlippedCard3 = false; // Track card state for Card 3
+        private bool isFlippedCard1 = false; // Isto poput predavaca
+        private bool isFlippedCard2 = false; 
+        private bool isFlippedCard3 = false; 
 
         public CustomerView()
         {
@@ -24,7 +24,6 @@ namespace WpfApp2.View
         {
             if (sender is Border clickedCard)
             {
-                // Get the animation resource based on which card was clicked
                 Storyboard? flipAnimation = clickedCard.Tag switch
                 {
                     "Card 1" => (Storyboard?)clickedCard.Resources["FlipAnimationCard1"],
@@ -40,14 +39,12 @@ namespace WpfApp2.View
             }
         }
 
-        // Flip method for Card 1
+        // Kartica 1
         private void FlipHalfwayCard1(object sender, EventArgs e)
         {
-            // Toggle visibility between front and back of Card 1
             FrontSide.Visibility = isFlippedCard1 ? Visibility.Visible : Visibility.Hidden;
             BackSide.Visibility = isFlippedCard1 ? Visibility.Hidden : Visibility.Visible;
 
-            // Play second half of the flip animation for Card 1
             ScaleTransform scaleTransform = (ScaleTransform)FindName("Card1Scale");
             if (scaleTransform != null)
             {
@@ -55,17 +52,16 @@ namespace WpfApp2.View
                 scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, secondHalf);
             }
 
-            isFlippedCard1 = !isFlippedCard1; // Toggle state
+            isFlippedCard1 = !isFlippedCard1; 
         }
 
-        // Flip method for Card 2
+        // Kartica 2
         private void FlipHalfwayCard2(object sender, EventArgs e)
         {
-            // Toggle visibility between front and back of Card 2
+
             FrontSide2.Visibility = isFlippedCard2 ? Visibility.Visible : Visibility.Hidden;
             BackSide2.Visibility = isFlippedCard2 ? Visibility.Hidden : Visibility.Visible;
 
-            // Play second half of the flip animation for Card 2
             ScaleTransform scaleTransform = (ScaleTransform)FindName("Card2Scale");
             if (scaleTransform != null)
             {
@@ -73,17 +69,15 @@ namespace WpfApp2.View
                 scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, secondHalf);
             }
 
-            isFlippedCard2 = !isFlippedCard2; // Toggle state
+            isFlippedCard2 = !isFlippedCard2; 
         }
 
-        // Flip method for Card 3
+        // Kartica 3
         private void FlipHalfwayCard3(object sender, EventArgs e)
         {
-            // Toggle visibility between front and back of Card 3
             FrontSide3.Visibility = isFlippedCard3 ? Visibility.Visible : Visibility.Hidden;
             BackSide3.Visibility = isFlippedCard3 ? Visibility.Hidden : Visibility.Visible;
 
-            // Play second half of the flip animation for Card 3
             ScaleTransform scaleTransform = (ScaleTransform)FindName("Card3Scale");
             if (scaleTransform != null)
             {
@@ -91,46 +85,36 @@ namespace WpfApp2.View
                 scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, secondHalf);
             }
 
-            isFlippedCard3 = !isFlippedCard3; // Toggle state
+            isFlippedCard3 = !isFlippedCard3; 
         }
 
         private void DodajPolaznika(object sender, RoutedEventArgs e)
         {
-            // Get the values from the TextBoxes
             string idText = IdTextBox.Text;
             string name = NameTextBox.Text;
             string surname = SurnameTextBox.Text;
             string course = CourseTextBox.Text;
 
-            // Check if the ID only contains digits
             if (System.Text.RegularExpressions.Regex.IsMatch(idText, @"^\d+$"))
             {
-                // Hide error message
                 ErrorPoruka1.Visibility = Visibility.Collapsed;
 
-                // Convert ID to integer
                 int id = int.Parse(idText);
 
-                // Create an instance of PolaznikRepository to interact with the database
                 PolaznikRepository polaznikRepo = new PolaznikRepository();
 
-                // Check if the Polaznik already exists
                 if (polaznikRepo.IsPolaznikExists(id))
                 {
-                    // If the Polaznik exists, show an error message
                     MessageBox.Show("Polaznik sa ovim ID-om već postoji u bazi podataka!");
                 }
                 else
                 {
-                    // If the Polaznik doesn't exist, add it to the database
                     bool isInserted = polaznikRepo.AddPolaznikToDatabase(id, name, surname, course);
 
                     if (isInserted)
                     {
-                        // Show success message
                         MessageBox.Show("Polaznik je upisan u bazu podataka.");
 
-                        // Optionally clear textboxes
                         NameTextBox.Clear();
                         SurnameTextBox.Clear();
                         IdTextBox.Clear();
@@ -138,14 +122,12 @@ namespace WpfApp2.View
                     }
                     else
                     {
-                        // Show error if insertion fails
                         MessageBox.Show("Greška pri unosu u bazu podataka.");
                     }
                 }
             }
             else
             {
-                // If the ID is invalid (not a number), show an error message
                 ErrorPoruka1.Visibility = Visibility.Visible;
                 ErrorPoruka1.Text = "ID mora sadržavati samo brojke";
             }

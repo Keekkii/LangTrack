@@ -14,7 +14,7 @@ namespace WpfApp2.ViewModel
 {
     public class LoginViewModel : ViewModelBase
     {
-        //Fields
+        //polja
         private string _username;
         private SecureString _password;
         private string _errorMessage;
@@ -60,12 +60,11 @@ namespace WpfApp2.ViewModel
             }
         }
 
-        //-> Commands
         public ICommand LoginCommand { get; }
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
 
-        //Constructor
+        //Konstruktor
         public LoginViewModel()
         {
             userRepository = new UserRepository();

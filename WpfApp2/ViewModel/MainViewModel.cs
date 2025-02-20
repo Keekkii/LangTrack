@@ -14,7 +14,7 @@ namespace WpfApp2.ViewModel
 {
     public class MainViewModel: ViewModelBase
     {
-        //Fields
+        //polja
         private UserAccountModel _currentUserAccount;
         private ViewModelBase _currentChildView;
         private string _caption;
@@ -53,7 +53,6 @@ namespace WpfApp2.ViewModel
             }
         }
 
-        // Commands
         public ICommand ShowHomeViewCommand { get; }
         public ICommand ShowCustomerViewCommand { get; }
 
@@ -66,12 +65,10 @@ namespace WpfApp2.ViewModel
             userRepository = new UserRepository();
             CurrentUserAccount = new UserAccountModel();
 
-            //Initilize commands
             ShowHomeViewCommand = new ViewModelCommand(ExecuteShowHomeViewCommand);
             ShowCustomerViewCommand = new ViewModelCommand(ExecuteShowCustomerViewCommand);
             ShowStatistikaViewCommand = new ViewModelCommand(ExecuteShowStatistikaViewCommand);
 
-            //Default view
             ExecuteShowHomeViewCommand(null);
 
             LoadCurrentUserData();
@@ -110,7 +107,6 @@ namespace WpfApp2.ViewModel
             else
             {
                 CurrentUserAccount.DisplayName="Invalid user, not logged in";
-                //Hide child views
             }
         }
     }

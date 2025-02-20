@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace WpfApp2.ViewModel
 {
-    public abstract class ViewModelBase: INotifyPropertyChanged //asbtract moze se koristiti samo nasljedivanjem
+    public abstract class ViewModelBase: INotifyPropertyChanged 
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

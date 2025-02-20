@@ -16,9 +16,7 @@ using System.Windows.Interop;
 
 namespace WpfApp2.View
 {
-    /// <summary>
-    /// Interaction logic for MainView.xaml
-    /// </summary>
+
     public partial class MainView : Window
     {
         public MainView()

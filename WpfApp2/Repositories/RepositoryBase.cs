@@ -13,13 +13,13 @@ namespace WpfApp2.Repositories
             string dbFile = "database.db"; // SQLite database file
             _connectionString = $"Data Source={dbFile};Version=3;";
 
-            // Ensure the database file exists
+            // Kreiranje baze ako ona ne postoji
             if (!File.Exists(dbFile))
             {
                 SQLiteConnection.CreateFile(dbFile);
             }
 
-            EnsureDatabaseSetup(); // Ensure tables exist
+            EnsureDatabaseSetup(); 
         }
 
         protected SQLiteConnection GetConnection()
@@ -27,7 +27,7 @@ namespace WpfApp2.Repositories
             return new SQLiteConnection(_connectionString);
         }
 
-        private void EnsureDatabaseSetup()
+        private void EnsureDatabaseSetup() //Skripta za kreiranje baze
         {
             using (var connection = GetConnection())
             {
@@ -71,7 +71,7 @@ namespace WpfApp2.Repositories
                     command.ExecuteNonQuery();
                 }
 
-                EnsureAdminUser(connection); // Ensure an admin user exists
+                EnsureAdminUser(connection); // Osigurava postojanje admin usera
             }
         }
 

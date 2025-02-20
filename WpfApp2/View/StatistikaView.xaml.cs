@@ -16,9 +16,6 @@ using WpfApp2.ViewModel;
 
 namespace WpfApp2.View
 {
-    /// <summary>
-    /// Interaction logic for StatistikaView.xaml
-    /// </summary>
     public partial class StatistikaView : UserControl
     {
         public StatistikaView()

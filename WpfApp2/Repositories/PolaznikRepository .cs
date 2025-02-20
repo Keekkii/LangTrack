@@ -31,7 +31,7 @@ namespace WpfApp2.Repositories
                 }
                 catch (Exception ex)
                 {
-                    // Log the full exception to get more info
+                    // Ispis exceptiona 
                     Console.WriteLine($"Error: {ex.Message}");
                     throw new Exception("Error checking if Polaznik exists: " + ex.Message);
                 }
@@ -41,7 +41,7 @@ namespace WpfApp2.Repositories
 
 
 
-        // Add Polaznik to the database
+        // Dodavanje polaznika u bazu
         public bool AddPolaznikToDatabase(int id, string name, string surname, string course)
         {
             using (var connection = GetConnection())
@@ -51,14 +51,14 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO Polaznik (Id, Name, Surname, Course) VALUES (@id, @name, @surname, @course)"; // Use Polaznik here
+                    command.CommandText = "INSERT INTO Polaznik (Id, Name, Surname, Course) VALUES (@id, @name, @surname, @course)"; 
                     command.Parameters.Add("@id", DbType.Int32).Value = id;
                     command.Parameters.Add("@name", DbType.String).Value = name;
                     command.Parameters.Add("@surname", DbType.String).Value = surname;
                     command.Parameters.Add("@course", DbType.String).Value = course;
 
-                    int result = command.ExecuteNonQuery(); // Returns number of rows affected
-                    return result > 0; // If rows are affected, insertion was successful
+                    int result = command.ExecuteNonQuery(); 
+                    return result > 0; // Uvjet uspjesnog upisa
                 }
                 catch (Exception ex)
                 {
@@ -67,7 +67,7 @@ namespace WpfApp2.Repositories
             }
         }
 
-        // Delete Polaznik from the database
+        // Brisanje polaznika iz baze
         public bool DeletePolaznikById(int id)
         {
             using (var connection = GetConnection())
@@ -80,18 +80,18 @@ namespace WpfApp2.Repositories
                     command.CommandText = "DELETE FROM Polaznik WHERE Id = @id";
                     command.Parameters.Add("@id", DbType.Int32).Value = id;
 
-                    int result = command.ExecuteNonQuery(); // Returns number of rows affected
-                    return result > 0; // If rows are affected, deletion was successful
+                    int result = command.ExecuteNonQuery(); 
+                    return result > 0; // Uvjet uspjesnog brisanja
                 }
                 catch (Exception ex)
                 {
-                    // Optionally show an error message or log the error
+                    // Greska pri brisanju
                     throw new Exception("Error deleting Polaznik from database: " + ex.Message);
                 }
             }
         }
 
-        // Update Polaznik data in the database
+        // Promjena polaznika
         public bool UpdatePolaznik(int id, string name, string surname, string course)
         {
             using (var connection = GetConnection())
@@ -107,12 +107,11 @@ namespace WpfApp2.Repositories
                     command.Parameters.Add("@surname", DbType.String).Value = surname;
                     command.Parameters.Add("@course", DbType.String).Value = course;
 
-                    int result = command.ExecuteNonQuery(); // Returns number of rows affected
-                    return result > 0; // If rows are affected, update was successful
+                    int result = command.ExecuteNonQuery(); 
+                    return result > 0; // Uvjet uspesnosti
                 }
                 catch (Exception ex)
                 {
-                    // Optionally show an error message or log the error
                     throw new Exception("Error updating Polaznik in database: " + ex.Message);
                 }
             }
@@ -127,7 +126,7 @@ namespace WpfApp2.Repositories
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "SELECT COUNT(*) FROM Polaznik"; // Simple count query
+                    command.CommandText = "SELECT COUNT(*) FROM Polaznik"; // Upit za brojanje polaznika, koristi se za statistiku
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
                 catch (Exception ex)

@@ -9,14 +9,12 @@ using WpfApp2.Repositories;
 
 namespace WpfApp2.View
 {
-    /// <summary>
-    /// Interaction logic for HomeView.xaml
-    /// </summary>
+
     public partial class PredavacView : UserControl
     {
-        private bool isFlippedCard1 = false; // Track card state for Card 1
-        private bool isFlippedCard2 = false; // Track card state for Card 2
-        private bool isFlippedCard3 = false; // Track card state for Card 3
+        private bool isFlippedCard1 = false; // Pracenje stanja kartica
+        private bool isFlippedCard2 = false; 
+        private bool isFlippedCard3 = false; 
         public PredavacView()
         {
             InitializeComponent();
@@ -25,7 +23,7 @@ namespace WpfApp2.View
         {
             if (sender is Border clickedCard)
             {
-                // Get the animation resource based on which card was clicked
+                // Animation resource ovisno o kliknutoj kartici
                 Storyboard? flipAnimation = clickedCard.Tag switch
                 {
                     "Card 1" => (Storyboard?)clickedCard.Resources["FlipAnimationCard1"],
@@ -40,14 +38,14 @@ namespace WpfApp2.View
                 }
             }
         }
-        // Flip method for Card 1
+        // Flip metoda za karticu 1
         private void FlipHalfwayCard1(object sender, EventArgs e)
         {
-            // Toggle visibility between front and back of Card 1
+            // Proomjena vidljivosti
             FrontSide.Visibility = isFlippedCard1 ? Visibility.Visible : Visibility.Hidden;
             BackSide.Visibility = isFlippedCard1 ? Visibility.Hidden : Visibility.Visible;
 
-            // Play second half of the flip animation for Card 1
+            // Druga polovica animacije
             ScaleTransform scaleTransform = (ScaleTransform)FindName("Card1Scale");
             if (scaleTransform != null)
             {
@@ -55,17 +53,17 @@ namespace WpfApp2.View
                 scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, secondHalf);
             }
 
-            isFlippedCard1 = !isFlippedCard1; // Toggle state
+            isFlippedCard1 = !isFlippedCard1; // Promjena stanja
         }
 
-        // Flip method for Card 2
+        // Flip metoda za karticu 2
         private void FlipHalfwayCard2(object sender, EventArgs e)
         {
-            // Toggle visibility between front and back of Card 2
+            // Proomjena vidljivosti
             FrontSide2.Visibility = isFlippedCard2 ? Visibility.Visible : Visibility.Hidden;
             BackSide2.Visibility = isFlippedCard2 ? Visibility.Hidden : Visibility.Visible;
 
-            // Play second half of the flip animation for Card 2
+            // Druga polovica animacije
             ScaleTransform scaleTransform = (ScaleTransform)FindName("Card2Scale");
             if (scaleTransform != null)
             {
@@ -73,17 +71,17 @@ namespace WpfApp2.View
                 scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, secondHalf);
             }
 
-            isFlippedCard2 = !isFlippedCard2; // Toggle state
+            isFlippedCard2 = !isFlippedCard2; // Promjena stanja
         }
 
-        // Flip method for Card 3
+        // Flip metoda za karticu 3
         private void FlipHalfwayCard3(object sender, EventArgs e)
         {
-            // Toggle visibility between front and back of Card 3
+            // Proomjena vidljivosti
             FrontSide3.Visibility = isFlippedCard3 ? Visibility.Visible : Visibility.Hidden;
             BackSide3.Visibility = isFlippedCard3 ? Visibility.Hidden : Visibility.Visible;
 
-            // Play second half of the flip animation for Card 3
+            // Druga polovica animacije
             ScaleTransform scaleTransform = (ScaleTransform)FindName("Card3Scale");
             if (scaleTransform != null)
             {
@@ -91,45 +89,44 @@ namespace WpfApp2.View
                 scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, secondHalf);
             }
 
-            isFlippedCard3 = !isFlippedCard3; // Toggle state
+            isFlippedCard3 = !isFlippedCard3; // Promjena stanja
         }
         private void DodajPredavaca(object sender, RoutedEventArgs e)
         {
-            // Get the values from the TextBoxes
+            // Poprimanje vrijednost it textboxa
             string idText = IdTextBox.Text;
             string name = NameTextBox.Text;
             string surname = SurnameTextBox.Text;
             string course = CourseTextBox.Text;
 
-            // Check if the ID only contains digits
+            // Provjera ID-a, moraju biti samo brojevi
             if (System.Text.RegularExpressions.Regex.IsMatch(idText, @"^\d+$"))
             {
-                // Hide error message
+                // ErrorPoruka je skrivena na pocetku
                 ErrorPoruka1.Visibility = Visibility.Collapsed;
 
-                // Convert ID to integer
+                // Pretvara ID u int
                 int id = int.Parse(idText);
 
-                // Create an instance of PolaznikRepository to interact with the database
+                // Stvaranje instance za interakciju s bazom
                 PredavacRepository predavacRepo = new PredavacRepository();
 
-                // Check if the Polaznik already exists
+                // Provjera postoji li polaznik s ovim ID
                 if (predavacRepo.IsPredavacExists(id))
                 {
-                    // If the Polaznik exists, show an error message
+                    // Error ako postoji
                     MessageBox.Show("Predavač sa ovim ID-om već postoji u bazi podataka!");
                 }
                 else
                 {
-                    // If the Polaznik doesn't exist, add it to the database
+                    // Ako ne postoji dodaje se u bazu
                     bool isInserted = predavacRepo.AddPredavacToDatabase(id, name, surname, course);
 
                     if (isInserted)
                     {
-                        // Show success message
+                        // Poruka uspjeha
                         MessageBox.Show("Predavač je upisan u bazu podataka.");
 
-                        // Optionally clear textboxes
                         NameTextBox.Clear();
                         SurnameTextBox.Clear();
                         IdTextBox.Clear();
@@ -137,14 +134,14 @@ namespace WpfApp2.View
                     }
                     else
                     {
-                        // Show error if insertion fails
+                        // Greska pri unosu
                         MessageBox.Show("Greška pri unosu u bazu podataka.");
                     }
                 }
             }
             else
             {
-                // If the ID is invalid (not a number), show an error message
+                // Promjena vidljivosti ako se desi error
                 ErrorPoruka1.Visibility = Visibility.Visible;
                 ErrorPoruka1.Text = "ID mora sadržavati samo brojke";
             }
