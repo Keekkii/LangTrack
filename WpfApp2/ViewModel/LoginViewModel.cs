@@ -62,7 +62,6 @@ namespace WpfApp2.ViewModel
 
         //-> Commands
         public ICommand LoginCommand { get; }
-        public ICommand RecoverPasswordCommand { get; }
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
 
@@ -71,7 +70,6 @@ namespace WpfApp2.ViewModel
         {
             userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
-            RecoverPasswordCommand = new ViewModelCommand(p=>ExecuteRecoverPassCommand("", ""));
         }
 
         private bool CanExecuteLoginCommand(object obj)
@@ -97,10 +95,6 @@ namespace WpfApp2.ViewModel
                 ErrorMessage = "* Invalid username or password";
             }
                
-        }
-        private void ExecuteRecoverPassCommand(string username, string email)
-        {
-            throw new NotImplementedException();
         }
     }
 }

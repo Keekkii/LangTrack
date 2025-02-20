@@ -38,18 +38,14 @@
                 <!-- Front Side (Matches the other two cards) -->
                 <Grid x:Name="FrontSide">
                     <Border CornerRadius="10" Padding="10">
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#060531" Offset="0"/>
-                                <GradientStop Color="#1B1448" Offset="0.75"/>
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
+
                         <Border.Background>
-                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                                <GradientStop Color="#1B1448" Offset="0"/>
-                                <GradientStop Color="#060531" Offset="1"/>
+                            <LinearGradientBrush>
+                                <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                                <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
+
 
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
                             <TextBlock Text="Dodavanje predavača" Foreground="White" FontSize="20" FontWeight="Bold" 
@@ -62,43 +58,39 @@
                 <!-- Back Side (Same gradient background, no text) -->
                 <Grid x:Name="BackSide" Visibility="Hidden">
                     <Border CornerRadius="10" Padding="10">
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#060531" Offset="0"/>
-                                <GradientStop Color="#1B1448" Offset="0.75"/>
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
+
                         <Border.Background>
-                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                                <GradientStop Color="#1B1448" Offset="0"/>
-                                <GradientStop Color="#060531" Offset="1"/>
+                            <LinearGradientBrush>
+                                <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                                <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
+
 
                         <!-- StackPanel centered but with consistent TextBox alignment -->
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
                             <!-- Name Input -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Ime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,32,0" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="NameTextBox" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                                <TextBox x:Name="NameTextBox" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
                             <!-- Surname Input -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Prezime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <TextBox x:Name="SurnameTextBox" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                                <TextBox x:Name="SurnameTextBox" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
                             <!-- ID Input -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="ID:" Foreground="White" VerticalAlignment="Center" Margin="0,0,40,0"/>
-                                <TextBox x:Name="IdTextBox" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                                <TextBox x:Name="IdTextBox" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
                             <!-- Tečaj Input -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Tečaj:" Foreground="White" VerticalAlignment="Center" Margin="0,0,26,0"/>
-                                <TextBox x:Name="CourseTextBox" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                                <TextBox x:Name="CourseTextBox" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
                             <Button Content="Dodaj predavača" HorizontalAlignment="Center" VerticalAlignment="Center" Click="DodajPredavaca" Margin="10"/>
                             <TextBlock Name="ErrorPoruka1" Foreground="Red" Visibility="Collapsed" Margin="10" />
@@ -130,18 +122,14 @@
                 <!-- Front Side (Card 2) -->
                 <Grid x:Name="FrontSide2">
                     <Border CornerRadius="10" Padding="10">
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#060531" Offset="0"/>
-                                <GradientStop Color="#1B1448" Offset="0.75"/>
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
+
                         <Border.Background>
-                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                                <GradientStop Color="#1B1448" Offset="0"/>
-                                <GradientStop Color="#060531" Offset="1"/>
+                            <LinearGradientBrush>
+                                <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                                <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
+
 
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
                             <TextBlock Text="Brisanje predavača" Foreground="White" FontSize="20" FontWeight="Bold" FontFamily="Montserrat" HorizontalAlignment="Center"/>
@@ -153,42 +141,37 @@
                 <!-- Back Side (Card 2) -->
                 <Grid x:Name="BackSide2" Visibility="Hidden">
                     <Border CornerRadius="10" Padding="10">
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#060531" Offset="0"/>
-                                <GradientStop Color="#1B1448" Offset="0.75"/>
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
+                        
                         <Border.Background>
-                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                                <GradientStop Color="#1B1448" Offset="0"/>
-                                <GradientStop Color="#060531" Offset="1"/>
+                            <LinearGradientBrush>
+                                <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                                <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
                             </LinearGradientBrush>
-
                         </Border.Background>
+
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
                             <!-- Name Input -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Ime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,33,0" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="NameTextBox1" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                                <TextBox x:Name="NameTextBox1" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
                             <!-- Surname Input -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Prezime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <TextBox x:Name="SurnameTextBox1" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                                <TextBox x:Name="SurnameTextBox1" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
                             <!-- ID Input -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="ID:" Foreground="White" VerticalAlignment="Center" Margin="0,0,41,0"/>
-                                <TextBox x:Name="IdTextBox1" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                                <TextBox x:Name="IdTextBox1" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
                             <!-- Tečaj Input -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Tečaj:" Foreground="White" VerticalAlignment="Center" Margin="0,0,26,0"/>
-                                <TextBox x:Name="CourseTextBox1" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                                <TextBox x:Name="CourseTextBox1" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
                             <Button Content="Izbrisi predavača" HorizontalAlignment="Center" VerticalAlignment="Center" Click="IzbrisiPredavaca" Margin="10"/>
                             <TextBlock Name="ErrorPoruka2" Foreground="Red" Visibility="Collapsed" Margin="10" />
@@ -218,18 +201,14 @@
                 <!-- Front Side (Card 3) -->
                 <Grid x:Name="FrontSide3">
                     <Border CornerRadius="10" Padding="10">
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#060531" Offset="0"/>
-                                <GradientStop Color="#1B1448" Offset="0.75"/>
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
+
                         <Border.Background>
-                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                                <GradientStop Color="#1B1448" Offset="0"/>
-                                <GradientStop Color="#060531" Offset="1"/>
+                            <LinearGradientBrush>
+                                <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                                <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
+
 
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20">
                             <TextBlock Text="Promjena predavača" Foreground="White" FontSize="20" FontWeight="Bold" FontFamily="Montserrat" HorizontalAlignment="Center"/>
@@ -240,18 +219,14 @@
                 <!-- Back Side (Card 3) -->
                 <Grid x:Name="BackSide3" Visibility="Hidden">
                     <Border CornerRadius="10" Padding="10">
-                        <Border.BorderBrush>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#060531" Offset="0"/>
-                                <GradientStop Color="#1B1448" Offset="0.75"/>
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
+
                         <Border.Background>
-                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                                <GradientStop Color="#1B1448" Offset="0"/>
-                                <GradientStop Color="#060531" Offset="1"/>
+                            <LinearGradientBrush>
+                                <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                                <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
+
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
                             <!--  Obavijest  -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
@@ -261,24 +236,24 @@
                             <!-- Name Input -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Ime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,32,0" HorizontalAlignment="Left"/>
-                                <TextBox x:Name="NameTextBox2" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                                <TextBox x:Name="NameTextBox2" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
                             <!-- Surname Input -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Prezime:" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <TextBox x:Name="SurnameTextBox2" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                                <TextBox x:Name="SurnameTextBox2" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
                             <!-- ID Input -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="ID:" Foreground="White" VerticalAlignment="Center" Margin="0,0,40,0"/>
-                                <TextBox x:Name="IdTextBox2" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                                <TextBox x:Name="IdTextBox2" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
 
                             <!-- Tečaj Input -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
                                 <TextBlock Text="Tečaj:" Foreground="White" VerticalAlignment="Center" Margin="0,0,26,0"/>
-                                <TextBox x:Name="CourseTextBox2" Width="200" Height="25" Background="#1B1448" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
+                                <TextBox x:Name="CourseTextBox2" Width="200" Height="25" Background="#14756F" Foreground="White" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Right" />
                             </StackPanel>
                             <Button Content="Promijeni predavača" HorizontalAlignment="Center" VerticalAlignment="Center" Click="PromijeniPredavaca" Margin="10"/>
 

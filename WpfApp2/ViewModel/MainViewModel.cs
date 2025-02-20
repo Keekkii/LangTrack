@@ -70,7 +70,6 @@ namespace WpfApp2.ViewModel
             ShowHomeViewCommand = new ViewModelCommand(ExecuteShowHomeViewCommand);
             ShowCustomerViewCommand = new ViewModelCommand(ExecuteShowCustomerViewCommand);
             ShowStatistikaViewCommand = new ViewModelCommand(ExecuteShowStatistikaViewCommand);
-            ShowTablicaViewCommand = new ViewModelCommand(ExecuteShowTablicaViewCommand);
 
             //Default view
             ExecuteShowHomeViewCommand(null);
@@ -97,13 +96,6 @@ namespace WpfApp2.ViewModel
             CurrentChildView = new StatistikaViewModel();
             Caption = "Statistika";
             Icon = IconChar.PieChart;
-        }
-
-        private void ExecuteShowTablicaViewCommand(object obj)
-        {
-            CurrentChildView = new TablicaViewModel();
-            Caption = "Tablica";
-            Icon = IconChar.Table;
         }
 
         private void LoadCurrentUserData()
