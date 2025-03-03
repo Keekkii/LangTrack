@@ -9,7 +9,17 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        <TextBlock Text="TablicaView" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <!-- DataGrid for displaying the data -->
+        <DataGrid AutoGenerateColumns="False" 
+                  ItemsSource="{Binding TablicaData}" 
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
+                <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Prezime" Binding="{Binding Surname}" Width="*"/>
+                <DataGridTextColumn Header="Uloga" Binding="{Binding Role}" Width="*"/>
+                <DataGridTextColumn Header="Tečaj" Binding="{Binding Course}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
-
 </UserControl>
