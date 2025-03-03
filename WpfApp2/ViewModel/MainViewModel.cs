@@ -12,7 +12,7 @@ using WpfApp2.Repositories;
 
 namespace WpfApp2.ViewModel
 {
-    public class MainViewModel: ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
         //polja
         private UserAccountModel _currentUserAccount;
@@ -21,18 +21,25 @@ namespace WpfApp2.ViewModel
         private IconChar _icon;
         private IUserRepository userRepository;
 
-        public UserAccountModel CurrentUserAccount {
+        public UserAccountModel CurrentUserAccount
+        {
             get { return _currentUserAccount; }
-            set { _currentUserAccount = value;
+            set
+            {
+                _currentUserAccount = value;
                 OnPropertyChanged(nameof(CurrentUserAccount));
             }
 
         }
 
-        public ViewModelBase CurrentChildView {
+        public ViewModelBase CurrentChildView
+        {
             get { return _currentChildView; }
-            set { _currentChildView = value;
-                OnPropertyChanged(nameof(CurrentChildView)); }
+            set
+            {
+                _currentChildView = value;
+                OnPropertyChanged(nameof(CurrentChildView));
+            }
         }
         public string Caption
         {
@@ -68,6 +75,7 @@ namespace WpfApp2.ViewModel
             ShowHomeViewCommand = new ViewModelCommand(ExecuteShowHomeViewCommand);
             ShowCustomerViewCommand = new ViewModelCommand(ExecuteShowCustomerViewCommand);
             ShowStatistikaViewCommand = new ViewModelCommand(ExecuteShowStatistikaViewCommand);
+            ShowTablicaViewCommand = new ViewModelCommand(ExecuteShowTablicaViewCommand);
 
             ExecuteShowHomeViewCommand(null);
 
@@ -95,18 +103,32 @@ namespace WpfApp2.ViewModel
             Icon = IconChar.PieChart;
         }
 
+        private void ExecuteShowTablicaViewCommand(object obj)
+        {
+            CurrentChildView = new TablicaViewModel();
+            Caption = "Tablica";
+            Icon = IconChar.Table;
+        }
+
         private void LoadCurrentUserData()
         {
-            var user = userRepository.GetByUsername(Thread.CurrentPrincipal.Identity.Name);
-            if (user != null) {
+            if (Thread.CurrentPrincipal?.Identity == null || string.IsNullOrEmpty(Thread.CurrentPrincipal.Identity.Name))
+            {
+                CurrentUserAccount.DisplayName = "Invalid user, not logged in";
+                return;
+            }
 
+            var user = userRepository.GetByUsername(Thread.CurrentPrincipal.Identity.Name);
+            if (user != null)
+            {
                 CurrentUserAccount.Username = user.Username;
                 CurrentUserAccount.DisplayName = $"{user.Name} {user.LastName} ;)";
                 CurrentUserAccount.ProfilePicture = null;
             }
             else
             {
-                CurrentUserAccount.DisplayName="Invalid user, not logged in";
+                CurrentUserAccount.DisplayName = "Invalid user, not logged in";
+
             }
         }
     }

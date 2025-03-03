@@ -11,16 +11,26 @@ namespace WpfApp2
         {
             var loginView = new LoginView();
             loginView.Show();
+
+            loginView.Closed += (s, ev) => // Kada se LoginView zatvori, osiguraj da ne pokreće ništa drugo
+            {
+                loginView = null; // Sprječava korištenje zatvorenog objekta
+            };
+
             loginView.IsVisibleChanged += (s, ev) =>
             {
-                if (loginView.IsVisible == false && loginView.IsLoaded)
+                if (!loginView.IsVisible && loginView.IsLoaded)
                 {
                     var mainView = new MainView();
                     mainView.Show();
-                    loginView.Close();
+
+                    // Provjeri da li prozor nije već zatvoren
+                    if (loginView != null)
+                    {
+                        loginView.Close();
+                    }
                 }
             };
         }
     }
-
 }

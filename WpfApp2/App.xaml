@@ -16,6 +16,12 @@
             <DataTemplate DataType="{x:Type vm:StatistikaViewModel}">
                 <vw:StatistikaView />
             </DataTemplate>
+
+            <!-- DataTemplate to bind TablicaViewModel to TablicaView -->
+            <DataTemplate DataType="{x:Type vm:TablicaViewModel}">
+                <vw:TablicaView />
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
