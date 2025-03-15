@@ -42,5 +42,39 @@ namespace WpfApp2.Repositories
 
             return allData;
         }
+
+        // Method to delete data from the database
+        public void DeleteData(TablicaModel item)
+        {
+            if (item == null)
+            {
+                Console.WriteLine("Item to delete is null.");
+                return;
+            }
+
+            Console.WriteLine($"Attempting to delete: Id = {item.Id}, Role = {item.Role}");
+
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+
+                string query = string.Empty;
+
+                if (item.Role == "Polaznik")
+                {
+                    query = "DELETE FROM Polaznik WHERE Id = @Id";
+                }
+                else if (item.Role == "Predavac")
+                {
+                    query = "DELETE FROM Predavac WHERE Id = @Id";
+                }
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", item.Id);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
