@@ -1,19 +1,27 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WpfApp2.Model;
 using WpfApp2.Repositories;
+using WpfApp2.ViewModel;
 
 namespace WpfApp2.ViewModel
 {
     public class TablicaViewModel : ViewModelBase
     {
         private readonly TablicaRepository _tablicaRepository;
+        private ObservableCollection<TablicaModel> _tablicaData;
+        private ObservableCollection<TablicaModel> _originalData; 
 
-        // ObservableCollection to hold the data for the DataGrid
-        public ObservableCollection<TablicaModel> TablicaData { get; set; }
+        public ObservableCollection<TablicaModel> TablicaData
+        {
+            get { return _tablicaData; }
+            set
+            {
+                _tablicaData = value;
+                OnPropertyChanged(nameof(TablicaData));
+            }
+        }
 
-        // Selected item for deletion
         private TablicaModel _selectedTablicaModel;
         public TablicaModel SelectedTablicaModel
         {
@@ -21,46 +29,102 @@ namespace WpfApp2.ViewModel
             set { SetProperty(ref _selectedTablicaModel, value); }
         }
 
-        // Command for deleting the row
         public ICommand DeleteCommand { get; private set; }
+        public ICommand FilterPredavaciCommand { get; private set; }
+        public ICommand FilterPolazniciCommand { get; private set; } 
+        public ICommand FilterTecajCommand { get; private set; } 
 
         public TablicaViewModel()
         {
             _tablicaRepository = new TablicaRepository();
+            _originalData = new ObservableCollection<TablicaModel>(); // Inicijalizacija liste
             TablicaData = new ObservableCollection<TablicaModel>();
-            DeleteCommand = new ViewModelCommand(DeleteRow, CanDeleteRow); // Initialize DeleteCommand
 
-            // Load data from repository (example method, you can customize it)
+            DeleteCommand = new ViewModelCommand(DeleteRow, CanDeleteRow);
+            FilterPredavaciCommand = new ViewModelCommand(FilterPredavaci);
+            FilterPolazniciCommand = new ViewModelCommand(FilterPolaznici); 
+            FilterTecajCommand = new ViewModelCommand(FilterTecaj); 
+
             LoadData();
         }
 
-        // Method to load data from repository
         private void LoadData()
         {
             var data = _tablicaRepository.GetAllData();
-            foreach (var item in data)
-            {
-                TablicaData.Add(item);
-            }
+            _originalData = new ObservableCollection<TablicaModel>(data); // Pohrani originalne podatke
+            TablicaData = new ObservableCollection<TablicaModel>(_originalData);
+
+            Console.WriteLine($"Učitano zapisa: {_originalData.Count}");
         }
 
-        // Method to delete a row
         private void DeleteRow(object parameter)
         {
             if (SelectedTablicaModel != null)
             {
-                // Remove from the ObservableCollection (UI update)
                 TablicaData.Remove(SelectedTablicaModel);
-
-                // Call repository to delete data from the database
                 _tablicaRepository.DeleteData(SelectedTablicaModel);
             }
         }
 
-        // CanExecute method for DeleteCommand (only allow delete if an item is selected)
         private bool CanDeleteRow(object parameter)
         {
-            return SelectedTablicaModel != null; // Only allow delete when a row is selected
+            return SelectedTablicaModel != null;
+        }
+
+        private void FilterPredavaci(object parameter)
+        {
+            if (_originalData != null && _originalData.Any())
+            {
+                var filteredData = _originalData
+                    .Where(item => item.Role != null &&
+                                  (item.Role.Equals("Predavac", StringComparison.OrdinalIgnoreCase) ||
+                                   item.Role.Equals("Predavač", StringComparison.OrdinalIgnoreCase)))
+                    .ToList();
+
+                TablicaData.Clear(); // Očisti postojeće podatke
+                foreach (var item in filteredData)
+                {
+                    TablicaData.Add(item); // Dodaj filtrirane podatke
+                }
+            }
+        }
+
+        private void FilterPolaznici(object parameter)
+        {
+            if (_originalData != null && _originalData.Any())
+            {
+                var filteredData = _originalData
+                    .Where(item => item.Role != null && item.Role.Equals("Polaznik", StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                TablicaData.Clear(); // Očisti postojeće podatke
+                foreach (var item in filteredData)
+                {
+                    TablicaData.Add(item); // Dodaj filtrirane podatke
+                }
+            }
+        }
+
+        private void FilterTecaj(object parameter)
+        {
+            if (_originalData != null && _originalData.Any())
+            {
+                var distinctCourses = _originalData
+                    .Select(item => item.Course) 
+                    .Distinct() 
+                    .Where(course => !string.IsNullOrEmpty(course)) 
+                    .ToList();
+
+                var filteredData = distinctCourses
+                    .Select(course => new TablicaModel { Course = course }) 
+                    .ToList();
+
+                TablicaData.Clear(); 
+                foreach (var item in filteredData)
+                {
+                    TablicaData.Add(item); 
+                }
+            }
         }
     }
 }

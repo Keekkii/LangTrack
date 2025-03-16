@@ -18,9 +18,9 @@ namespace WpfApp2.Repositories
 
                 // Query both Polaznik and Predavac tables
                 string query = @"
-                    SELECT Id, Name, Surname, 'Polaznik' AS Uloga, Course AS Tečaj FROM Polaznik
+                    SELECT Id, Name, Surname, 'Polaznik' AS Role, Course AS Course FROM Polaznik
                     UNION ALL
-                    SELECT Id, Name, Surname, 'Predavac' AS Uloga, Subject AS Tečaj FROM Predavac;
+                    SELECT Id, Name, Surname, 'Predavac' AS Role, Subject AS Course FROM Predavac;
                 ";
 
                 using (var command = new SQLiteCommand(query, connection))
@@ -33,8 +33,8 @@ namespace WpfApp2.Repositories
                             Id = Convert.ToInt32(reader["Id"]),
                             Name = reader["Name"].ToString(),
                             Surname = reader["Surname"].ToString(),
-                            Role = reader["Uloga"].ToString(),
-                            Course = reader["Tečaj"].ToString()
+                            Role = reader["Role"].ToString(),
+                            Course = reader["Course"].ToString()
                         });
                     }
                 }

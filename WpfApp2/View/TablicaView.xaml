@@ -36,9 +36,9 @@
 		<!-- Buttons below DataGrid -->
 		<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
 			<Button Content="Brisanje" Margin="5" Padding="10,5" Command="{Binding DeleteCommand}" />
-			<Button Content="Predavači" Margin="5" Padding="10,5"/>
-			<Button Content="Polaznici" Margin="5" Padding="10,5"/>
-			<Button Content="Tečaj" Margin="5" Padding="10,5"/>
+            <Button Content="Predavači" Margin="5" Padding="10,5" Command="{Binding FilterPredavaciCommand}"/>
+            <Button Content="Polaznici" Margin="5" Padding="10,5" Command="{Binding FilterPolazniciCommand}"/>
+            <Button Content="Tečaj" Margin="5" Padding="10,5" Command="{Binding FilterTecajCommand}"/>
 		</StackPanel>
 	</Grid>
 </UserControl>
